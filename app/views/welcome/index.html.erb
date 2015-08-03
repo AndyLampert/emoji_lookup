@@ -1,6 +1,10 @@
 <div class="container">
   <div class="row">
-    <h1 class="text-center">HI!, <%= @user.email %>!</h1>
+    <% if current_user? %>
+      <h1 class="text-center">HI!, <%= @user.email %>!</h1>
+    <% else %>
+      <h1 class="text-center">Hey there! Make an account NOW!</h1>
+    <% end %>
     <%= render 'posts/new_entry' %>
     <%#= render 'posts/index' %>
   </div>
