@@ -26,8 +26,7 @@ gem 'capybara'
 # from work
 gem 'devise'
 # turn off asset logging in dev
-gem 'quiet_assets', :group => :development do
-end
+gem 'quiet_assets', :group => :development
 
 # message queueing
 gem 'resque', :require => 'resque/server'
@@ -38,6 +37,7 @@ gem 'american_date'
 gem 'acts_as_commentable'
 gem 'activerecord-colored_log_subscriber'
 gem 'hirb' # used to output tables in the console. to enable: Hirb.enable, disable: Hirb.disable
+gem 'squeel' # better activerecord queries
 
 group :development, :test do
   gem 'byebug'

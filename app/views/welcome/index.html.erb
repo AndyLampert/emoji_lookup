@@ -1,2 +1,7 @@
-<h1>HI! </h1>
-<%= render 'posts/new_entry' %>
+<div class="container">
+  <div class="row">
+    <h1 class="text-center">HI!, <%= @user.email %>!</h1>
+    <%= render 'posts/new_entry' %>
+    <%#= render 'posts/index' %>
+  </div>
+</div>
