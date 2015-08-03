@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 
 gem 'rails', '4.2.3'
-gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'uglifier', '>= 1.3.0'
@@ -26,6 +25,7 @@ gem 'capybara'
 # from work
 gem 'devise'
 # turn off asset logging in dev
+
 gem 'quiet_assets', :group => :development
 
 # message queueing
@@ -40,6 +40,9 @@ gem 'hirb' # used to output tables in the console. to enable: Hirb.enable, disab
 gem 'squeel' # better activerecord queries
 
 group :development, :test do
+  # for heroku
+  gem 'sqlite3'
+
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
@@ -56,4 +59,9 @@ group :test do
   gem 'launchy'
 end
 
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
 
+ruby '2.2.1'
