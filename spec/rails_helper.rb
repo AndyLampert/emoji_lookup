@@ -52,4 +52,7 @@ RSpec.configure do |config|
 
   config.backtrace_exclusion_patterns << /\.rvm\/gems/
 
+  # to get devise tests to pass
+  config.include Devise::TestHelpers, type: :controller
+
 end
