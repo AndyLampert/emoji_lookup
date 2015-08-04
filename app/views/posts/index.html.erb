@@ -11,6 +11,7 @@
           <th colspan="3"></th>
         </tr>
       </thead>
+      <%= link_to 'New Post', new_post_path %>
 
       <tbody>
         <% @posts.each do |post| %>
@@ -26,6 +27,5 @@
 
     <br>
 
-    <%= link_to 'New Post', new_post_path %>
   </div>
 </div>
