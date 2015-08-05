@@ -38,6 +38,7 @@ gem 'acts_as_commentable'
 gem 'activerecord-colored_log_subscriber'
 gem 'hirb' # used to output tables in the console. to enable: Hirb.enable, disable: Hirb.disable
 gem 'squeel' # better activerecord queries
+gem 'better_errors'
 
 group :development, :test do
   # for heroku
