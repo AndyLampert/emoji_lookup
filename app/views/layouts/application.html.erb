@@ -7,10 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
 <%= render 'layouts/main_nav' %>
-
-<%= yield %>
-
+<div class="container panel panel-default" style="margin: 20px auto; padding: 40px">
+  <%= yield %>
+</div>
 </body>
 </html>

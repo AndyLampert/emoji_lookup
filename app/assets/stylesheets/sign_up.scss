@@ -1,0 +1,9 @@
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+.label-header {
+  margin: 40px !important;
+  text-align: left;
+}
