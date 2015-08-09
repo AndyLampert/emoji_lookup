@@ -1,9 +1,11 @@
-<%= simple_form_for(@comment) do |f| %>
+
+<%= simple_form_for(@post) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <p>Add a comment to: </p><%= f.label :entry %>
     <%#= f.input :post_id %>
-    <%= f.input :body %>
+    <%= f.input :comments %>
     <%#= f.association :user %>
   </div>
 
@@ -11,3 +13,5 @@
     <%= f.button :submit %>
   </div>
 <% end %>
+
+All comments: <% @post.comments %>

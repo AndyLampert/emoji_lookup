@@ -81,7 +81,7 @@ class PostsController < ApplicationController
     end
 
     def authorized_user
-      @post = current_user.posts.find(id: params[:id])
+      @post = current_user.posts.find(params[:id])
     end
 
     def commentable
