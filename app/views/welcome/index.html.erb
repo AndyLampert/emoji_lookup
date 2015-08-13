@@ -19,7 +19,7 @@
         <tr>
           <% title =  p.entry %>
           <td>Post title: <%= link_to title, post_path(p) %> </td>
-          <td>By user:<%#= p.username %></td>
+          <td>By user: <%= p.user_id %></td>
           <td>Post comments:<%= p.comments %></td>
         </tr>
       <% end %>
