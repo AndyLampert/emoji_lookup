@@ -9,12 +9,13 @@
 <% end %>
 
 <p>
-  <strong>Comment fool!</strong>
-  <%= render 'comments/new' %>
+  <strong>Current Comments:</strong>
+  <% @comments.each do |c| %>
+    <p><%= c.body %></p>
+  <% end %>
 </p>
 
-<p>
-  <strong>Current Comments:</strong>
-  <%= @comments %>
-</p>
+<h2>Add a comment</h2>
+<%= render 'comments/new' %>
+
 <%= link_to 'Back', posts_path %>

@@ -69,14 +69,6 @@ class CommentsController < ApplicationController
     end
 
     def set_user
-      @comment = Comment.find(params[:id])
-
-      @listing = Listing.find(params[:listing_id])
-
-      @comment = @listing.comments.create(params[:comment])
-      redirect_to listing_path(@listing)
-
-
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

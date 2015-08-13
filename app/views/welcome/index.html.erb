@@ -17,12 +17,10 @@
     <tbody>
       <% @last_five_posts.each do |p| %>
         <tr>
-          <td>Post Entry</td>
-          <td><%= p.entry %></td>
-          <td>User id (for now)</td>
-          <td><%= p.user_id %></td>
-          <td>Best Comment!</td>
-          <td>TODO</td>
+          <% title =  p.entry %>
+          <td>Post title: <%= link_to title, post_path(p) %> </td>
+          <td>By user:<%#= p.username %></td>
+          <td>Post comments:<%= p.comments %></td>
         </tr>
       <% end %>
     </tbody>

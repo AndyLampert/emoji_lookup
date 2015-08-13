@@ -65,4 +65,9 @@ group :production do
   gem 'rails_12factor'
 end
 
+# auth
+# gem 'omniauth'
+# gem 'omniauth-linkedin'
+
+
 ruby '2.2.1'
