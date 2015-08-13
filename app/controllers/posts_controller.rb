@@ -76,6 +76,7 @@ class PostsController < ApplicationController
     def set_post_and_comments
       @post = Post.find(params[:id]) if params[:id]
       @comments = @post.comments
+      @user = @post.user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
