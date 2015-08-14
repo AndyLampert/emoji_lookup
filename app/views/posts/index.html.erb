@@ -23,8 +23,8 @@
                 <%= link_to title, post_path(post) %></td>
               <% end %>
             <td>
-              <% if post.user %>
-                <%= post.user.username %></td>
+              <% if user = post.user %>
+                <%= user.username %></td>
               <% end %>
               <% if post.comments %>
                 <% post.comments.each do |comment| %>

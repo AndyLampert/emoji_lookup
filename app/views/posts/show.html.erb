@@ -1,21 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Post Title:</strong>
-  <%= @post.entry %>
+<h3>Post Title:</h3>
+<%= @post.entry %>
 </p>
 <% if @post.user == current_user %>
-  <%= link_to 'Edit', edit_post_path(@post) %> |
+  <small>sorry, once a post is made, you're stuck with it! <br>
+    If you don't like it, you can either delete it or make another one!</small>
 <% end %>
 
 <p>
-  <strong>Current Comments:</strong>
-  <% @comments.each do |c| %>
-    <p><%= c.body %></p>
+  <h3>Current Comments:</h3>
+  <% if @post.comments %>
+    <% @comments.each do |c| %>
+      <p><%= c.body %></p>
+    <% end %>
+  <% else %>
+    <p>This post doesn't have any comments yet!</p>
   <% end %>
 </p>
 
-<h2>Add a comment</h2>
-<%= render 'comments/new' %>
+<h3>Add a comment</h3>
 
-<%= link_to 'Back', posts_path %>
+<%#= render 'views/comments/new' %>

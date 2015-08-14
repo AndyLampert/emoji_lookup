@@ -3,26 +3,27 @@
     <% if current_user %>
       <h1 class="text-center">HI!, <%= @user.email %>!</h1>
     <% else %>
-      <h1 class="text-center">Hey there! Make an account NOW!</h1>
+      <h1 class="text-center">Hey there! Make an account NOW! <small>or sign in... </small></h1>
     <% end %>
     <%= render 'posts/new_entry' %>
-    <%#= render 'posts/index' %>
   </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th colspan="3">Check out all these awesome posts!</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @last_five_posts.each do |p| %>
+  <% unless @last_five_posts %>
+    <table class="table">
+      <thead>
         <tr>
-          <% title = p.entry %>
-          <td>Post title: <%= link_to title, post_path(p) %> </td>
-          <td>By user: <%= @user.username %></td>
-          <td>Post comments:<%= p.comment_id %></td>
+          <th colspan="3">Check out all these awesome posts!</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @last_five_posts.each do |p| %>
+          <tr>
+            <% title = p.entry %>
+            <td>Post title: <%= link_to title, post_path(p) %> </td>
+            <td>By user: <%= @user.username %></td>
+            <td>Post comments:<%= p.comment_id %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </div>

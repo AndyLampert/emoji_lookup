@@ -3,7 +3,7 @@
   <li><%= link_to 'Emoji!', root_path %></li>
   <li><%= link_to 'Profile', edit_user_registration_path %></li>
   <% if user_signed_in? %>
-    <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete, data: { confirm: 'foo' } %></li>
+    <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure you wanna sign out?' } %></li>
   <% else %>
     <li><%= link_to 'Sign in', new_user_session_path %></li>
     <li><%= link_to 'Register Account', new_user_registration_path %></li>
