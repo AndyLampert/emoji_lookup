@@ -4,11 +4,13 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+    <%= f.email_field :email, required: true, autofocus: true %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
+
+    <p>Username: <%= f.text_field :username, required: true, autofocus: true %></p>
 
     <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
     <%= f.input :password_confirmation, required: false %>
@@ -20,17 +22,23 @@
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
 
 <h3>Your posts!</h3>
-<%= @posts.each do |p| %>
-  <% if p.entry.present? %>
-    <p><%= p.entry %></p>
-  <% else %>
-    <p><%= p.entry %> doesn't have any comments yet!</p>
+<% if @posts %>
+  <% @posts.each do |p| %>
+    <% if p.entry.present? %>
+      <p><% title = p.entry %><%= link_to title, post_path(p) %></p>
+    <% else %>
+      <p><%= p.entry %> doesn't have any comments yet!</p>
+    <% end %>
   <% end %>
 <% end %>
+
+
+<br>
+<br>
+<br>
+
+<h4>Cancel my account</h4>
+
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>

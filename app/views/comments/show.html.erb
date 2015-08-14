@@ -12,8 +12,9 @@
 
 <p>
   <strong>User:</strong>
-  <%= @user.username %>
+  <% if @comment %>
+    <%= @comment.user %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_comment_path(@comment) %> |
-<%= link_to 'Back', comments_path %>
