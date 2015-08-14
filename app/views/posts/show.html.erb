@@ -9,16 +9,14 @@
     If you don't like it, you can either delete it or make another one!</small>
 <% end %>
 
-<p>
+<div>
   <h3>Current Comments:</h3>
-  <% if @post.comments %>
-    <% @comments.each do |c| %>
-      <p><%= c.body %></p>
-    <% end %>
-  <% else %>
-    <p>This post doesn't have any comments yet!</p>
+    <ul>
+  <% @comments.each do |c| %>
+      <li><%= c.body %></li>
   <% end %>
-</p>
+    </ul>
+</div>
 
 <h3>Add a comment</h3>
 

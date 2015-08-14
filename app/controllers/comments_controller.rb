@@ -4,17 +4,22 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    @post = Post.find(params[:post_id])
+    @comments = @post.comments
   end
 
   # GET /comments/1
   # GET /comments/1.json
   def show
+    @post = Post.find(params[:post_id])
+    @comments = @post.comments
   end
 
   # GET /comments/new
   def new
-    @comment = Comment.new
+    @post = Post.find(params[:post_id])
+    @comment = @post.comment.build
+    # @post.comments << @comment
   end
 
   # GET /comments/1/edit
@@ -24,18 +29,25 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
-
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
-    end
+    @comment = Comment.new
+    @comment.post_id = params[:post_id]
+    @comment.user_id = current_user.id
+    @comment.body = params[:comment]['body']
+    @comment.save
+    redirect_to post_path(params[:post_id])
+    # render json: [params, @comment]
   end
+
+  # def create
+  #   @post = Post.find(params[:post_id])
+  #   # @comment = this posts' new comment on submit
+  #   @comment
+  #   if @comment.save
+  #
+  #     # put this comment into the the post.comments array
+  #     #   then go back to this posts' show page
+  #   end
+  # end
 
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
@@ -65,8 +77,7 @@ class CommentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_comment_post_and_user
       @comment = Comment.find(params[:id])
-      @post = @comment.post
-      @user = @comment.user
+      @user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

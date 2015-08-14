@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, :except => [:index, :show]
   # You have to be authorized to...
   before_action :authorized_user, only: [:edit, :update, :destroy]
-  before_action :commentable, only: [:index, :show, :edit]
 
   # GET /posts
   # GET /posts.json
@@ -16,6 +15,8 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post = Post.find(params[:id])
+    @comments = @post.comments
     @comment = Comment.new
   end
 
@@ -88,7 +89,4 @@ class PostsController < ApplicationController
       @post = current_user.posts.find(params[:id])
     end
 
-    def commentable
-      @post
-    end
 end
