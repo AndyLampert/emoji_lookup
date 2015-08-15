@@ -78,7 +78,7 @@ class CommentsController < ApplicationController
   def vote_comment_up
     @comment = Comment.find(params[:id])
     # TODO If that user has already voted, make sure they can't again
-    @comment.votes.create(:user_id => current_user.id) # unless @comment.votes
+    @comment.votes.where(:user_id => current_user.id).first_or_create
 
     # TODO Make sure the page doesn't reset to the top
     redirect_to @comment.post, notice: 'Thanks for voting!'
