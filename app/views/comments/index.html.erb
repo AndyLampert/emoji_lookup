@@ -8,6 +8,7 @@
       <tr>
         <th>Post</th>
         <th>Body</th>
+        <th>Vote</th>
         <th>User</th>
         <th colspan="3"></th>
       </tr>
@@ -18,6 +19,7 @@
         <tr>
           <td><%= comment.post_id %></td>
           <td><%= comment.body %></td>
+          <td><%= comment.vote_count %></td>
           <td><%= comment.user %></td>
         </tr>
       <% end %>
@@ -27,3 +29,9 @@
   <p>There aren't any comments yet!</p>
   <p>Go to the <%= link_to 'Posts Page', posts_path %></p>
 <% end %>
+
+<hr>
+
+<% @comment = @comments[0] %>
+vote test:: <%= @comment.vote_count %>
+<%= link_to 'UP', vote_up_post_comment_path(@post, @comment), :remote => true %>

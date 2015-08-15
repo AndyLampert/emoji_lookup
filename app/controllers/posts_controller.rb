@@ -73,20 +73,20 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post_and_comments
-      @post = Post.find(params[:id]) if params[:id]
-      @comments = @post.comments
-      @user = @post.user
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post_and_comments
+    @post = Post.find(params[:id]) if params[:id]
+    @comments = @post.comments
+    @user = @post.user
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:entry)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:entry)
+  end
 
-    def authorized_user
-      @post = current_user.posts.find(params[:id])
-    end
+  def authorized_user
+    @post = current_user.posts.find(params[:id])
+  end
 
 end

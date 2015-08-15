@@ -1,21 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-<h3>Post Title:</h3>
-<%= @post.entry %>
-</p>
-<% if @post.user == current_user %>
-  <small>sorry, once a post is made, you're stuck with it! <br>
-    If you don't like it, you can either delete it or make another one!</small>
-<% end %>
+<h3>Post Title: <%= @post.entry %></h3>
 
 <div>
   <h3>Current Comments:</h3>
-    <ul>
-  <% @comments.each do |c| %>
-      <li><%= c.body %></li>
-  <% end %>
-    </ul>
+  <ul>
+    <% @comments.each do |c| %>
+      <div class="comment-container">
+        <p><%= link_to 'UP', vote_up_post_comment_path(@post, c) %>  |  <%= link_to 'DOWN!' %></p>
+        <p class="text-muted">Votes: <%= c.vote_count %></p>
+        <h4><%= c.body %></h4>
+        <p><%= c.votes.count %></p>
+      </div>
+    <% end %>
+  </ul>
 </div>
 
 <h3>Add a comment</h3>

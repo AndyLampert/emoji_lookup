@@ -4,13 +4,6 @@ class Comment < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :post
+  has_many :votes
 
-  def add_comment(post, user)
-    post = Post.find(params[:id])
-    user = current_user
-
-    # t.integer  "post_id"
-    # t.text     "body"
-    # t.integer  "user_id"
-  end
 end

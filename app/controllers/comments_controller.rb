@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
   def show
     @post = Post.find(params[:post_id])
     @comments = @post.comments
+    @vote_count = @comment.vote_count
   end
 
   # GET /comments/new
@@ -30,6 +31,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new
+    @comment.vote_count = 0
     @comment.post_id = params[:post_id]
     @comment.user_id = current_user.id
     @comment.body = params[:comment]['body']
@@ -71,6 +73,21 @@ class CommentsController < ApplicationController
       format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def vote_comment_up
+    # @post = Post.find(params[:post_id])
+    @comment = Comment.find(params[:id])
+    @comment.votes.create
+    redirect_to @comment.post, notice: "oianersioarst"
+
+    # @vote = @comment.votes.create(:user_id => current_user.id, :comment_id => @comment.id)
+    # @comment.votes.create(:user_id => current_user.id)
+    # redirect_to @comment.post, notice: "thanks for voting!! "
+  end
+
+  def vote_comment_down
+    @comment.vote_count = @comment.vote_count - 1
   end
 
   private
