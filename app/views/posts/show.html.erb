@@ -8,9 +8,8 @@
     <% @comments.each do |c| %>
       <div class="comment-container">
         <p><%= link_to 'UP', vote_up_post_comment_path(@post, c) %>  |  <%= link_to 'DOWN!' %></p>
-        <p class="text-muted">Votes: <%= c.vote_count %></p>
+        <p class="text-muted">Votes: <%= c.votes.count %></p>
         <h4><%= c.body %></h4>
-        <p><%= c.votes.count %></p>
       </div>
     <% end %>
   </ul>
