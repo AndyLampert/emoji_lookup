@@ -14,4 +14,6 @@ class User < ActiveRecord::Base
 
   has_many :posts
   has_many :comments
+  # TODO need a dependent destroy somewhere?
+  has_many :votes, through: :comments
 end
