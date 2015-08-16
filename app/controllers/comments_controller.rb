@@ -78,10 +78,12 @@ class CommentsController < ApplicationController
   # post.votes.where(user... type: "DownVote"),first
   def vote_comment_up
     @comment = Comment.find(params[:id])
-    # if @comment.up_votes
 
-    # end
     if @comment.votes.where(:user_id => current_user.id).blank?
+      @comment.votes.where(:user_id => current_user.id, :type => 'UpVote').first_or_create
+      redirect_to @comment.post, notice: 'Thanks for voting!'
+    elsif @comment.votes.where(:user_id => current_user.id, :type => 'DownVote')
+      @comment.votes.where(:user_id => current_user.id, :type => 'DownVote').delete_all
       @comment.votes.where(:user_id => current_user.id, :type => 'UpVote').first_or_create
       redirect_to @comment.post, notice: 'Thanks for voting!'
     else
@@ -91,8 +93,13 @@ class CommentsController < ApplicationController
 
   def vote_comment_down
     @comment = Comment.find(params[:id])
+
     if @comment.votes.where(:user_id => current_user.id).blank?
        @comment.votes.where(:user_id => current_user.id, :type => 'DownVote').first_or_create
+      redirect_to @comment.post, notice: 'Thanks for voting!'
+    elsif @comment.votes.where(:user_id => current_user.id, :type => 'UpVote')
+      @comment.votes.where(:user_id => current_user.id, :type => 'UpVote').delete_all
+      @comment.votes.where(:user_id => current_user.id, :type => 'DownVote').first_or_create
       redirect_to @comment.post, notice: 'Thanks for voting!'
     else
       redirect_to @comment.post, notice: 'You\'ve already voted!'
