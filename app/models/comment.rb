@@ -15,11 +15,14 @@ class Comment < ActiveRecord::Base
   end
 
   # downvote? -does this comment have a downvote from this user?
-  def downvote?
-  # TODO
+  def down_vote?
+    # TODO
+    votes.where(:type => 'DownVote')
   end
-  def upvote?
+
+  def up_vote?
     #TODO
+    votes.where(:type => 'UpVote')
   end
 
 end

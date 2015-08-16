@@ -78,26 +78,25 @@ class CommentsController < ApplicationController
   # post.votes.where(user... type: "DownVote"),first
   def vote_comment_up
     @comment = Comment.find(params[:id])
-    # TODO If that user has already voted, make sure they can't again
+    # if @comment.up_votes
 
-    # if the user hasn't voted on this comment yet...
-    @comment.votes.where(:user_id => current_user.id).first_or_intialiaze
-
-    # @comment.votes.where(:user_id => current_user.id).type = 'UpVote'
-
-    # TODO Make sure the page doesn't reset to the top
-    redirect_to @comment.post, notice: 'Thanks for voting!'
+    # end
+    if @comment.votes.where(:user_id => current_user.id).blank?
+      @comment.votes.where(:user_id => current_user.id, :type => 'UpVote').first_or_create
+      redirect_to @comment.post, notice: 'Thanks for voting!'
+    else
+      redirect_to @comment.post, notice: 'You\'ve already voted!'
+    end
   end
 
-
   def vote_comment_down
-    # If the current comment has already been voted on by the current_user
-    # don't allow a comment
     @comment = Comment.find(params[:id])
-
-    @comment.votes.where(:user_id => current_user.id).first_or_create
-    redirect_to @comment.post, notice: 'Thanks for voting!'
-
+    if @comment.votes.where(:user_id => current_user.id).blank?
+       @comment.votes.where(:user_id => current_user.id, :type => 'DownVote').first_or_create
+      redirect_to @comment.post, notice: 'Thanks for voting!'
+    else
+      redirect_to @comment.post, notice: 'You\'ve already voted!'
+    end
   end
 
   private

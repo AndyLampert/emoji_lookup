@@ -7,8 +7,11 @@
   <ul>
     <% @comments.each do |c| %>
       <div class="comment-container">
-        <p><%= link_to 'UP', vote_up_post_comment_path(@post, c) %>  |  <%= link_to 'DOWN!' %></p>
+        <p><%= link_to 'UP', vote_up_post_comment_path(@post, c) %>  |  <%= link_to 'DOWN!', vote_down_post_comment_path(@post, c) %></p>
         <p class="text-muted">Votes: <%= c.votes.count %></p>
+        <p class="text-muted">Votes Total: <%= c.votes.where(:type => 'UpVote').count - c.votes.where(:type => 'DownVote').count %></p>
+        <p class="text-muted">Up Votes: <%= c.votes.where(:type => 'UpVote').count %></p>
+        <p class="text-muted">Down Votes: <%= c.votes.where(:type => 'DownVote').count %></p>
         <h4><%= c.body %></h4>
       </div>
     <% end %>
