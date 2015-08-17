@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  include EmojiHelper
+
   before_action :set_comment_post_and_user, only: [:show, :edit, :update, :destroy]
 
   # GET /comments
@@ -30,6 +32,8 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+    params[:content] = emojify(params[:content])
+    resource.update_attributes(params)
     @comment = Comment.new
     @comment.vote_count = 0
     @comment.post_id = params[:post_id]
