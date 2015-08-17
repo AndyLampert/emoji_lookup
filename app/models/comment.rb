@@ -1,5 +1,7 @@
 class Comment < ActiveRecord::Base
 
+  include EmojiHelper
+
   validates :body, presence: true
 
   belongs_to :user
