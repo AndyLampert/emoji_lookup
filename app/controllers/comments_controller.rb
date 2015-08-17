@@ -110,6 +110,13 @@ class CommentsController < ApplicationController
     end
   end
 
+  # @comments = Comments.find(:all)
+  # @comments.sort! {|a, b|
+  #   rel = a.rating_score <=> b.rating_score
+  #   # if "rating_scores" are equivalent, only then consider "ratings"
+  #   rel == 0 ? a.ratings <=> b.ratings : rel
+  # }
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment_post_and_user

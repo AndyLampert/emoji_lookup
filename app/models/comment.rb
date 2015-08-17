@@ -8,23 +8,24 @@ class Comment < ActiveRecord::Base
   belongs_to :post
   has_many :votes, as: :votable
 
-  def up_votes
-    votes.where(:type => 'UpVote')
+  def up_vote_count
+    votes.where(:type => 'UpVote').count
   end
 
-  def down_votes
-    votes.where(:type => 'DownVote')
+  def down_vote_count
+    votes.where(:type => 'DownVote').count
   end
 
-  # downvote? -does this comment have a downvote from this user?
   def down_vote?
-    # TODO
     votes.where(:type => 'DownVote')
   end
 
   def up_vote?
-    #TODO
     votes.where(:type => 'UpVote')
+  end
+
+  def already_voted?
+    votes.where(:user_id => user).exists?
   end
 
 end

@@ -10,6 +10,8 @@
         <p><%= link_to 'UP', vote_up_post_comment_path(@post, c) %>  |  <%= link_to 'DOWN!', vote_down_post_comment_path(@post, c) %></p>
         <p class="text-muted">Votes: <%= c.votes.count %></p>
         <p class="text-muted">Votes Total: <%= c.votes.where(:type => 'UpVote').count - c.votes.where(:type => 'DownVote').count %></p>
+        <p class="text-muted">Total Votes: <%= c.votes.count %></p>
+        <p class="text-muted">Current Vote: <%= c.number_of_ups - c.number_of_downs %></p>
         <p class="text-muted">Up Votes: <%= c.votes.where(:type => 'UpVote').count %></p>
         <p class="text-muted">Down Votes: <%= c.votes.where(:type => 'DownVote').count %></p>
         <h4><%= c.body %></h4>
@@ -21,7 +23,18 @@
 <h3>Add a comment</h3>
 
 <%= render 'shared/new_comment' %>
-
 =======================
 <%= emojify("sup :cat:") %>
 <%= Emoji.find_by_alias("dog").raw %>
+
+<% if @comments[0].down_votes.exists? %>
+  <h1> down_vote? is true</h1>
+<% end %>
+
+<% if @comments[0].up_votes.exists? %>
+  <h1> up_vote? is true</h1>
+<% end %>
+
+<!--make a new user without posts and check this-->
+<h1>Already voted?</h1>
+<%= @comments[0].already_voted? %>
