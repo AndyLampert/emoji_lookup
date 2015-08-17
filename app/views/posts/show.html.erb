@@ -21,3 +21,7 @@
 <h3>Add a comment</h3>
 
 <%= render 'shared/new_comment' %>
+
+=======================
+<%= emojify("sup :cat:") %>
+<%= Emoji.find_by_alias("dog").raw %>
