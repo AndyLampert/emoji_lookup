@@ -32,9 +32,9 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    params[:content] = emojify(params[:content])
-    resource.update_attributes(params)
-    @comment = Comment.new
+    params[:emoji] = emojify(params[:emoji])
+    @comment = Comment.new(params[:emoji])
+    # @comment.update_attributes(params)
     @comment.vote_count = 0
     @comment.post_id = params[:post_id]
     @comment.user_id = current_user.id
@@ -43,17 +43,6 @@ class CommentsController < ApplicationController
     redirect_to post_path(params[:post_id])
     # render json: [params, @comment]
   end
-
-  # def create
-  #   @post = Post.find(params[:post_id])
-  #   # @comment = this posts' new comment on submit
-  #   @comment
-  #   if @comment.save
-  #
-  #     # put this comment into the the post.comments array
-  #     #   then go back to this posts' show page
-  #   end
-  # end
 
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
@@ -79,7 +68,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  # post.votes.where(user... type: "DownVote"),first
   def vote_comment_up
     @comment = Comment.find(params[:id])
 
@@ -110,13 +98,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  # @comments = Comments.find(:all)
-  # @comments.sort! {|a, b|
-  #   rel = a.rating_score <=> b.rating_score
-  #   # if "rating_scores" are equivalent, only then consider "ratings"
-  #   rel == 0 ? a.ratings <=> b.ratings : rel
-  # }
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment_post_and_user
@@ -126,6 +107,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:post_id, :body, :user_id)
+      params.require(:comment).permit(:post_id, :body, :emoji, :user_id)
     end
 end

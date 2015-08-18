@@ -16,11 +16,11 @@ class Comment < ActiveRecord::Base
     votes.where(:type => 'DownVote').count
   end
 
-  def down_vote?
+  def down_vote
     votes.where(:type => 'DownVote')
   end
 
-  def up_vote?
+  def up_vote
     votes.where(:type => 'UpVote')
   end
 
