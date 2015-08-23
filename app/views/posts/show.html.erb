@@ -1,35 +1,40 @@
 <p id="notice"><%= notice %></p>
 
-<h3>Post Title: <%= @post.entry %></h3>
+<h3><%= @post.entry %></h3>
+
+<%= render 'shared/new_comment' %>
+
 
 <div>
-  <h3>Current Comments:</h3>
+  <h3>Comments:</h3>
   <ul>
     <% @comments.each do |c| %>
-      <div class="comment-container">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-3">
-              <p><%= link_to 'UP', vote_up_post_comment_path(@post, c) %>  |  <%= link_to 'DOWN!', vote_down_post_comment_path(@post, c) %></p>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="well">
+            <div class="row">
+              <div class="col-md-3">
+                <p><%= link_to 'UP', vote_up_post_comment_path(@post, c) %>  |  <%= link_to 'DOWN!', vote_down_post_comment_path(@post, c) %></p>
 
-              <p class="text-muted">Votes Total: <%= c.up_vote_count - c.down_vote_count %></p>
-              <p class="text-muted">Current Vote: <%= c.down_vote_count - c.down_vote_count %></p>
-              <!--<p class="text-muted">Up Votes: <%#= c.votes.where(:type => 'UpVote').count %></p>-->
-              <!--<p class="text-muted">Down Votes: <%#= c.votes.where(:type => 'DownVote').count %></p>-->
-            </div>
-            <div class="col-md-9">
-              <h3><%= c.body %></h3>
+                <p class="text-muted">Votes Total: <%= c.up_vote_count - c.down_vote_count %></p>
+                <p class="text-muted">Current Vote: <%= c.down_vote_count - c.down_vote_count %></p>
+                <!--<p class="text-muted">Up Votes: <%#= c.votes.where(:type => 'UpVote').count %></p>-->
+                <!--<p class="text-muted">Down Votes: <%#= c.votes.where(:type => 'DownVote').count %></p>-->
+              </div>
+              <div class="col-md-9">
+                <h3><%= c.body %></h3>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
     <% end %>
   </ul>
 </div>
 
 <h3>Add a comment</h3>
 
-<%= render 'shared/new_comment' %>
 =======================
 <%= emojify("sup :cat:") %>
 <%= Emoji.find_by_alias("dog").raw %>

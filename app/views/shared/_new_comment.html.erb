@@ -1,13 +1,14 @@
 
-<%= simple_form_for [@post, @comment] do |f| %>
-  <%= f.error_notification %>
+<%= simple_form_for [@post, @comment], :html => { :class => 'form-inline' } do |f| %>
+  <div class="form-group">
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :body %>
-  </div>
+    <label class="control-label">Comment!</label>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+    <div class="form-inputs">
+      <%= f.text_field :body, :class => 'form-control input' %>
+      <%= f.submit 'Add Comment', :class => 'btn btn-primary' %>
+    </div>
   </div>
 
 <% end %>
