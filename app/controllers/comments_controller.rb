@@ -70,35 +70,38 @@ class CommentsController < ApplicationController
 
   def vote_comment_up
     @comment = Comment.find(params[:id])
-    # set the
-    @comment.votes.new
-    @comment.votes.last.user_id = current_user
+    @comment.votes.new(:user_id => current_user.id, :type => 'UpVote')
 
-    if @comment.already_voted? && @comment.up_vote
-      redirect_to @comment.post, notice: 'You\'ve already voted up!'
-    elsif @comment.already_voted? && @comment.down_vote
-      @comment.down_vote.delete_all
-      @comment.up_vote.first_or_create
-    else
-      @comment.up_vote.first_or_create
-      redirect_to @comment.post, notice: 'Thanks for voting!'
+    if @comment.save
+
+      if @comment.already_voted? && @comment.up_vote
+        redirect_to @comment.post, notice: 'You\'ve already voted up!'
+      elsif @comment.already_voted? && @comment.down_vote
+        @comment.down_vote.delete_all
+        @comment.up_vote.first_or_create
+      else
+        @comment.up_vote.first_or_create
+        redirect_to @comment.post, notice: 'Thanks for voting!'
+      end
+
     end
 
   end
 
   def vote_comment_down
     @comment = Comment.find(params[:id])
-    @comment.votes.new
-    @comment.votes.last.user_id = current_user
+    @comment.votes.new(:user_id => current_user.id, :type => 'DownVote')
 
-    if @comment.already_voted? && @comment.down_vote
-      redirect_to @comment.post, notice: 'You\'ve already voted down!'
-    elsif @comment.already_voted? && @comment.up_vote
-      @comment.up_vote.delete_all
-      @comment.down_vote.first_or_create
-    else
-      @comment.down_vote.first_or_create
-      redirect_to @comment.post, notice: 'Thanks for voting!'
+    if @comment.save
+      if @comment.already_voted? && @comment.down_vote
+        redirect_to @comment.post, notice: 'You\'ve already voted down!'
+      elsif @comment.already_voted? && @comment.up_vote
+        @comment.up_vote.delete_all
+        @comment.down_vote.first_or_create
+      else
+        @comment.down_vote.first_or_create
+        redirect_to @comment.post, notice: 'Thanks for voting!'
+      end
     end
 
   end

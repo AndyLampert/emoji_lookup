@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+
   devise_for :users, controllers: { registrations: 'registrations' }
+  get 'users/:id' => 'users#show', as: :user
 
   resources :posts do
     resources :comments, only: [:index, :new, :create] do

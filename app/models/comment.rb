@@ -24,6 +24,10 @@ class Comment < ActiveRecord::Base
     votes.where(:type => 'UpVote')
   end
 
+  # def set_down_vote
+    # votes.(type => 'DownVote')
+  # end
+
   def already_voted?
     votes.where(:user_id => user.id).exists?
   end

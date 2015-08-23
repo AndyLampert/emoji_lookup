@@ -53,7 +53,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe "GET #new" do
-    it "assigns a new post as @post" do
+    xit "assigns a new post as @post" do
       get :new, {}, valid_session
       expect(assigns(:post)).to be_a_new(Post)
     end

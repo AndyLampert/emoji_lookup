@@ -1,0 +1,8 @@
+<h2><%= @user.username %>'s Profile</h2>
+
+<h3><%= @user.username %>'s Posts:</h3>
+<% @posts.each do |p| %>
+  <% title = p.entry %>
+  <h3><%= link_to p.entry, post_path(p) %></h3>
+  <p class="text-muted">Votes are currently ... <%=  %></p>
+<% end %>
