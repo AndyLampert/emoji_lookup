@@ -1,38 +1,44 @@
 <div class="container">
+
   <div class="row">
-    <p id="notice"><%= notice %></p>
-
-    <h1>Listing Posts</h1>
-
-    <table class="table table-bordered">
-      <thead>
-      <tr>
-        <th>Post Title</th>
-        <th>By User</th>
-        <th>Comments</th>
-        <th colspan="3"></th>
-      </tr>
-      </thead>
-      <%= link_to 'New Post', new_post_path %>
-
-      <tbody>
+    <div class="col-md-8">
       <% @posts.each do |post| %>
-        <tr>
-          <% title = post.entry %>
-          <td><%= link_to title, post_path(post) %></td>
-          <td>
-            <% user = post.user %>
-            <%= user.username %></td>
-          <% post.comments %>
-          <% post.comments.each do |comment| %>
-            <td><%= comment.body %></td>
+        <% title = post.entry %>
+        <% user = post.user %>
+        <% username = user.username %>
+
+
+        <div class="well">
+          <h3 style="display: inline"><%= link_to title, post_path(post) %></h3>
+
+          <p style="display: inline">by: <%= username %></p>
+
+          <br>
+          <br>
+
+          <% first_comment = post.comments.first %>
+          <!-- TODO: change this from first to best comment-->
+          <p style="display: inline"><strong>First Comment:</strong></p>
+
+          <p style="display: inline"><%= first_comment.body %></p>
+
+          <br>
+          <br>
+          <%= simple_form_for [post, post.comments.build], :html => { :class => 'form-inline' } do |f| %>
+            <div class="form-group">
+              <label class="control-label">Comment!</label>
+              <div class="form-inputs">
+                <%= f.text_field :body, :class => 'form-control input' %>
+                <!-- TODO add ability to add your own comment to current post-->
+                <%= f.submit 'Add Comment', class: 'btn btn-primary' %>
+              </div>
+            </div>
           <% end %>
-        </tr>
+
+        </div>
       <% end %>
-      </tbody>
-    </table>
 
-    <br>
-
+    </div>
   </div>
+
 </div>
