@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
+  post 'add_comment' => 'posts#add_comment'
+
   root 'welcome#index'
 end
 

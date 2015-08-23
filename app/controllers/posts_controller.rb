@@ -20,6 +20,12 @@ class PostsController < ApplicationController
     @comment = Comment.new
   end
 
+  def add_comment
+    @post = Post.find(params[:id])
+    @comment = Comment.new
+    @comment.body = 'hi hi test'
+  end
+
   # GET /posts/new
   def new
     @post = current_user.posts.build

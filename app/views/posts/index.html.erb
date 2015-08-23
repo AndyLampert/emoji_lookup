@@ -7,6 +7,7 @@
         <% user = post.user %>
         <% username = user.username %>
 
+
         <div class="well">
           <h3 style="display: inline"><%= link_to title, post_path(post) %></h3>
 
@@ -16,16 +17,23 @@
           <br>
 
           <% first_comment = post.comments.first %>
-          <p style="display: inline">First Comment:</p>
+          <!-- TODO: change this from first to best comment-->
+          <p style="display: inline"><strong>First Comment:</strong></p>
 
           <p style="display: inline"><%= first_comment.body %></p>
 
           <br>
           <br>
-
-          <p>Comment!</p>
-          <!-- TODO add ability to add your own comment to current post-->
-
+          <%= simple_form_for [post, post.comments.build], :html => { :class => 'form-inline' } do |f| %>
+            <div class="form-group">
+              <label class="control-label">Comment!</label>
+              <div class="form-inputs">
+                <%= f.text_field :body, :class => 'form-control input' %>
+                <!-- TODO add ability to add your own comment to current post-->
+                <%= f.submit 'Add Comment', class: 'btn btn-primary' %>
+              </div>
+            </div>
+          <% end %>
 
         </div>
       <% end %>
