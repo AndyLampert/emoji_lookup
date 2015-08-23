@@ -14,10 +14,26 @@
           <div class="well">
             <div class="row">
               <div class="col-md-3">
+                <p class="text-muted">already_voted?</p>
+                <% if c.votes.each {|v| v.user_id }  %>
+                  <p>yes</p>
+                <% else %>
+                  <p>no</p>
+                <% end %>
+
                 <p><%= link_to 'UP', vote_up_post_comment_path(@post, c) %>  |  <%= link_to 'DOWN!', vote_down_post_comment_path(@post, c) %></p>
 
                 <p class="text-muted">Votes Total: <%= c.up_vote_count - c.down_vote_count %></p>
                 <p class="text-muted">Current Vote: <%= c.down_vote_count - c.down_vote_count %></p>
+
+
+
+                <ul>
+                  <li style="width: 200px">c.up_vote_count <%= c.up_vote_count %></li>
+                  <li style="width: 200px">c.down_vote_count <%= c.down_vote_count %></li>
+                  <li style="width: 200px">c.votes.count <%= c.votes.count %></li>
+                </ul>
+
                 <!--<p class="text-muted">Up Votes: <%#= c.votes.where(:type => 'UpVote').count %></p>-->
                 <!--<p class="text-muted">Down Votes: <%#= c.votes.where(:type => 'DownVote').count %></p>-->
               </div>
@@ -33,20 +49,7 @@
   </ul>
 </div>
 
-<h3>Add a comment</h3>
 
 =======================
 <%= emojify("sup :cat:") %>
 <%= Emoji.find_by_alias("dog").raw %>
-
-<% if @comments[0].down_vote.exists? %>
-  <h1> down_vote? is true</h1>
-<% end %>
-
-<% if @comments[0].up_vote.exists? %>
-  <h1> up_vote? is true</h1>
-<% end %>
-
-<!--make a new user without posts and check this-->
-<h1>Already voted?</h1>
-<%= @comments[0].already_voted? %>

@@ -70,32 +70,37 @@ class CommentsController < ApplicationController
 
   def vote_comment_up
     @comment = Comment.find(params[:id])
+    # set the
+    @comment.votes.new
+    @comment.votes.last.user_id = current_user
 
-    if @comment.votes.where(:user_id => current_user.id).blank?
-      @comment.votes.where(:user_id => current_user.id, :type => 'UpVote').first_or_create
-      redirect_to @comment.post, notice: 'Thanks for voting!'
-    elsif @comment.votes.where(:user_id => current_user.id, :type => 'DownVote')
-      @comment.votes.where(:user_id => current_user.id, :type => 'DownVote').delete_all
-      @comment.votes.where(:user_id => current_user.id, :type => 'UpVote').first_or_create
-      redirect_to @comment.post, notice: 'Thanks for voting!'
+    if @comment.already_voted? && @comment.up_vote
+      redirect_to @comment.post, notice: 'You\'ve already voted up!'
+    elsif @comment.already_voted? && @comment.down_vote
+      @comment.down_vote.delete_all
+      @comment.up_vote.first_or_create
     else
-      redirect_to @comment.post, notice: 'You\'ve already voted!'
+      @comment.up_vote.first_or_create
+      redirect_to @comment.post, notice: 'Thanks for voting!'
     end
+
   end
 
   def vote_comment_down
     @comment = Comment.find(params[:id])
+    @comment.votes.new
+    @comment.votes.last.user_id = current_user
 
-    if @comment.votes.where(:user_id => current_user.id).blank?
-       @comment.votes.where(:user_id => current_user.id, :type => 'DownVote').first_or_create
-      redirect_to @comment.post, notice: 'Thanks for voting!'
-    elsif @comment.votes.where(:user_id => current_user.id, :type => 'UpVote')
-      @comment.votes.where(:user_id => current_user.id, :type => 'UpVote').delete_all
-      @comment.votes.where(:user_id => current_user.id, :type => 'DownVote').first_or_create
-      redirect_to @comment.post, notice: 'Thanks for voting!'
+    if @comment.already_voted? && @comment.down_vote
+      redirect_to @comment.post, notice: 'You\'ve already voted down!'
+    elsif @comment.already_voted? && @comment.up_vote
+      @comment.up_vote.delete_all
+      @comment.down_vote.first_or_create
     else
-      redirect_to @comment.post, notice: 'You\'ve already voted!'
+      @comment.down_vote.first_or_create
+      redirect_to @comment.post, notice: 'Thanks for voting!'
     end
+
   end
 
   private

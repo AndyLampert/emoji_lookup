@@ -25,7 +25,7 @@ class Comment < ActiveRecord::Base
   end
 
   def already_voted?
-    votes.where(:user_id => user).exists?
+    votes.where(:user_id => user.id).exists?
   end
 
 end

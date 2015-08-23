@@ -2,6 +2,7 @@
 
   <div class="row">
     <div class="col-md-8">
+    <h3><%= link_to 'Post new entry!!', new_post_path %></h3>
       <% @posts.each do |post| %>
         <% title = post.entry %>
         <% user = post.user %>
@@ -29,7 +30,6 @@
               <label class="control-label">Comment!</label>
               <div class="form-inputs">
                 <%= f.text_field :body, :class => 'form-control input' %>
-                <!-- TODO add ability to add your own comment to current post-->
                 <%= f.submit 'Add Comment', class: 'btn btn-primary' %>
               </div>
             </div>
