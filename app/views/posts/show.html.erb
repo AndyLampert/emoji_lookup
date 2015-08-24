@@ -15,7 +15,8 @@
             <div class="row">
               <div class="col-md-3">
                 <p class="text-muted">already_voted?</p>
-                <% if c.votes.each {|v| v.user_id }  %>
+
+                <% if c.votes.each {|v| v.user_id } && c.votes.count > 0  %>
                   <p>yes</p>
                 <% else %>
                   <p>no</p>

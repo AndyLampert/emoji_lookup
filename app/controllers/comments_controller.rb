@@ -70,10 +70,9 @@ class CommentsController < ApplicationController
 
   def vote_comment_up
     @comment = Comment.find(params[:id])
-    @comment.votes.new(:user_id => current_user.id, :type => 'UpVote')
 
     if @comment.save
-
+      @comment.votes.new(:user_id => current_user.id, :type => 'UpVote')
       if @comment.already_voted? && @comment.up_vote
         redirect_to @comment.post, notice: 'You\'ve already voted up!'
       elsif @comment.already_voted? && @comment.down_vote
@@ -90,9 +89,9 @@ class CommentsController < ApplicationController
 
   def vote_comment_down
     @comment = Comment.find(params[:id])
-    @comment.votes.new(:user_id => current_user.id, :type => 'DownVote')
 
     if @comment.save
+      @comment.votes.new(:user_id => current_user.id, :type => 'DownVote')
       if @comment.already_voted? && @comment.down_vote
         redirect_to @comment.post, notice: 'You\'ve already voted down!'
       elsif @comment.already_voted? && @comment.up_vote
