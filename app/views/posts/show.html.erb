@@ -10,10 +10,10 @@
   <ul>
     <% @comments.each do |c| %>
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-sm-8">
           <div class="well">
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-sm-3">
                 <p class="text-muted">already_voted?</p>
 
                 <% if c.votes.each {|v| v.user_id } && c.votes.count > 0  %>
@@ -38,7 +38,7 @@
                 <!--<p class="text-muted">Up Votes: <%#= c.votes.where(:type => 'UpVote').count %></p>-->
                 <!--<p class="text-muted">Down Votes: <%#= c.votes.where(:type => 'DownVote').count %></p>-->
               </div>
-              <div class="col-md-9">
+              <div class="col-sm-9">
                 <h3><%= c.body %></h3>
               </div>
             </div>

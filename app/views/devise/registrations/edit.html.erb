@@ -1,44 +1,102 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="row">
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+  <div class="col-sm-6">
+    <h2>Edit Your Profile</h2>
 
-  <div class="form-inputs">
-    <%= f.email_field :email, required: true, autofocus: true %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal' }) do |f| %>
+      <%#= devise_error_messages! %>
+      <div class="form-group">
+        <% if f.error_notification %>
+          <div class="col-sm-6 alert alert-danger">
+            <%= f.error_notification %>
+          </div>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-3">
+          <%= f.label :email, class: 'control-label', style: 'text-align: left; padding-top: 0' %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.email_field :email, required: true, autofocus: true, class: 'pull-right form-control' %>
+        </div>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-3">
+          <%= f.label :username, class: 'control-label', style: 'text-align: left; padding-top: 0' %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.text_field :username, required: true, autofocus: true, class: 'pull-right form-control' %>
+        </div>
+      </div>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+      <div class="form-group">
+        <div class="col-sm-3">
+          <%= f.label :password, class: 'control-label', style: 'text-align: left; padding-top: 0' %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.password_field :password, autocomplete: 'off', hint: "leave it blank if you don't want to change it", required: false, class: 'pull-right form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-3">
+          <%= f.label :password_confirmation, class: 'control-label', style: 'text-align: left; padding-top: 0' %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.password_field :password_confirmation, required: false, class: 'pull-right form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-3">
+          <%= f.label :current_password, class: 'control-label', style: 'text-align: left; padding-top: 0' %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.password_field :current_password, hint: "we need your current password to confirm your changes", required: true, class: 'pull-right form-control' %>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <div class="col-sm-8">
+          <!-- TODO: Fix this btn's layout-->
+          <%= f.button :submit, "Update", class: 'btn btn-primary' %>
+        </div>
+      </div>
     <% end %>
-
-    <p>Username: <%= f.text_field :username, required: true, autofocus: true %></p>
-
-    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
-    <%= f.input :password_confirmation, required: false %>
-    <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
   </div>
+  <br>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
+  <!-- TODO: fix this vertical alignment -->
+  <h3 class="">Your posts!</h3>
+  <div class="col-sm-6">
+    <% if @posts %>
+      <% @posts.each do |post| %>
+        <% if post.entry.present? %>
+          <% title = post.entry %>
+          <% user = post.user %>
+          <% username = user.username %>
 
+          <div class="well">
+            <h3 style="display: inline"><%= link_to title, post_path(post) %></h3>
+            <br>
+            <br>
+            <% first_comment = post.comments.first %>
+            <p style="display: inline"><strong>First Comment:</strong></p>
+            <p style="display: inline"><%= first_comment.body %></p>
+            <br>
+          </div>
 
-<h3>Your posts!</h3>
-<% if @posts %>
-  <% @posts.each do |p| %>
-    <% if p.entry.present? %>
-      <p><% title = p.entry %><%= link_to title, post_path(p) %></p>
-    <% else %>
-      <p><%= p.entry %> doesn't have any comments yet!</p>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-<% end %>
-
+  </div>
+</div>
 
 <br>
 <br>
 <br>
 
-<h4>Cancel my account</h4>
+<h4>Hate this dumb site?</h4>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p><%= link_to "Cancel your account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
