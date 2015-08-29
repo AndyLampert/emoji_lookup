@@ -34,6 +34,14 @@
 
       <div class="form-group">
         <div class="col-sm-3">
+          <%= f.label :current_password, class: 'control-label', style: 'text-align: left; padding-top: 0' %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.password_field :current_password, hint: "we need your current password to confirm your changes", required: true, class: 'pull-right form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-3">
           <%= f.label :password, class: 'control-label', style: 'text-align: left; padding-top: 0' %>
         </div>
         <div class="col-sm-8">
@@ -48,14 +56,7 @@
           <%= f.password_field :password_confirmation, required: false, class: 'pull-right form-control' %>
         </div>
       </div>
-      <div class="form-group">
-        <div class="col-sm-3">
-          <%= f.label :current_password, class: 'control-label', style: 'text-align: left; padding-top: 0' %>
-        </div>
-        <div class="col-sm-8">
-          <%= f.password_field :current_password, hint: "we need your current password to confirm your changes", required: true, class: 'pull-right form-control' %>
-        </div>
-      </div>
+
 
       <div class="form-actions">
         <div class="col-sm-8">
@@ -83,7 +84,7 @@
             <br>
             <% first_comment = post.comments.first %>
             <p style="display: inline"><strong>First Comment:</strong></p>
-            <p style="display: inline"><%= first_comment.body %></p>
+            <p style="display: inline"><%= first_comment.body if first_comment %></p>
             <br>
           </div>
 

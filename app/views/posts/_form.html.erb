@@ -1,11 +1,12 @@
-<%= simple_form_for(@post) do |f| %>
+<%= simple_form_for @post, :html => { :class => 'form-inline' } do |f| %>
   <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :entry %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group">
+    <br>
+    <div class="input-group">
+      <%= f.text_field :entry, :class => 'form-control input input-lg' %>
+      <span class="input-group-btn">
+        <%= f.submit 'Create Post', class: 'btn btn-primary btn-lg' %>
+      </span>
+    </div>
   </div>
 <% end %>

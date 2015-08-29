@@ -21,16 +21,17 @@
           <!-- TODO: change this from first to best comment-->
           <p style="display: inline"><strong>First Comment:</strong></p>
 
-          <p style="display: inline"><%= first_comment.body %></p>
+          <p style="display: inline"><%= first_comment.body if first_comment %></p>
 
           <br>
           <br>
           <%= simple_form_for [post, post.comments.build], :html => { :class => 'form-inline' } do |f| %>
             <div class="form-group">
-              <label class="control-label">Comment!</label>
-              <div class="form-inputs">
-                <%= f.text_field :body, :class => 'form-control input' %>
-                <%= f.submit 'Add Comment', class: 'btn btn-primary' %>
+              <div class="input-group">
+                <%= f.text_field :body, :class => 'form-control input input-lg' %>
+                <span class="input-group-btn">
+                  <%= f.submit 'Add Comment', class: 'btn btn-primary btn-lg' %>
+                </span>
               </div>
             </div>
           <% end %>
