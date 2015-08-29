@@ -1,8 +1,9 @@
 FactoryGirl.define do
+
   factory :comment do
-    post_id 1
-body "MyText"
-user nil
+    title { Faker::App.name }
+    body { Faker::Lorem.paragraph(2) }
+    user
   end
 
 end
